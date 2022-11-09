@@ -1,0 +1,11 @@
+git init 
+git add .
+git commit -m 'first init project code'
+ git branch -D main
+git remote add origin https://github.com/xxx.git
+git remote set-url origin https://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@github.com/631700492/ruoyi-class.git
+git push -u origin master
+
+
+git remote set-url origin  https://<your_token>@github.com/<USERNAME>/<REPO>.git
+将<your_token>换成你自己得到的令牌。<USERNAME>是你自己github的用户名，<REPO>是你的项目名称
