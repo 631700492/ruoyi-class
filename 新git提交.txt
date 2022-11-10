@@ -9,3 +9,32 @@ git push -u origin master
 
 git remote set-url origin  https://<your_token>@github.com/<USERNAME>/<REPO>.git
 将<your_token>换成你自己得到的令牌。<USERNAME>是你自己github的用户名，<REPO>是你的项目名称
+
+
+
+linux
+https://baijiahao.baidu.com/s?id=1722728002073366376&wfr=spider&for=pc    安装redis
+https://blog.csdn.net/jarvan5/article/details/122752165  redis.conf配置参数
+
+ ps -aux|grep redis  ---查看redis是否启动
+ whereis redis-cli 是否有安装redis、redis 路径
+ cd /usr/local/redis  进入到redis目录
+ ./bin/redis-server redis.conf 启动
+ ./redis-cli shutdown 关闭redis
+
+ telnet 39.103.200.124 6379   window
+
+ 卸载
+ rm -rf /usr/local/bin/redis-* #删除redis文件
+  rm -rf redis-*
+
+
+linux mysql 安装
+https://blog.csdn.net/m0_67392010/article/details/126034669
+如果出现无法连接 https://blog.csdn.net/weixin_42599091/article/details/125224850
+
+vi /etc/my.cnf    修改数据库密码
+cd /usr/local   切换到sql目录
+systemctl start mysqld.service  启动sql
+service mysqld status  sql运行状态
+service mysqld restart   重启sql

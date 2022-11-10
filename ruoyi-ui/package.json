@@ -1,8 +1,8 @@
 {
-  "name": "ruoyi",
+  "name": "88",
   "version": "3.8.4",
-  "description": "若依管理系统",
-  "author": "若依",
+  "description": "88管理系统",
+  "author": "88",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",

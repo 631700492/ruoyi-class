@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CarRentalMapper">
+    
+    <resultMap type="CarRental" id="CarRentalResult">
+        <result property="id"    column="id"    />
+        <result property="carNumber"    column="car_number"    />
+        <result property="images"    column="images"    />
+        <result property="carColor"    column="car_color"    />
+        <result property="carPrice"    column="car_price"    />
+        <result property="carName"    column="car_name"    />
+        <result property="carModel"    column="car_model"    />
+        <result property="run"    column="run"    />
+        <result property="carMemo"    column="car_memo"    />
+        <result property="carStatus"    column="car_status"    />
+        <result property="driverUserId"    column="driver_user_id"    />
+        <result property="driverUserName"    column="driver_user_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="isDel"    column="is_del"    />
+    </resultMap>
+
+    <sql id="selectCarRentalVo">
+        select id, car_number, images, car_color, car_price, car_name, car_model, run, car_memo, car_status, driver_user_id, driver_user_name, create_by, create_time, update_by, update_time, is_del from car_rental
+    </sql>
+
+    <select id="selectCarRentalList" parameterType="CarRental" resultMap="CarRentalResult">
+        <include refid="selectCarRentalVo"/>
+        <where>  
+            <if test="carNumber != null  and carNumber != ''"> and car_number = #{carNumber}</if>
+            <if test="images != null  and images != ''"> and images = #{images}</if>
+            <if test="carColor != null  and carColor != ''"> and car_color = #{carColor}</if>
+            <if test="carPrice != null "> and car_price = #{carPrice}</if>
+            <if test="carName != null  and carName != ''"> and car_name like concat('%', #{carName}, '%')</if>
+            <if test="carModel != null  and carModel != ''"> and car_model = #{carModel}</if>
+            <if test="run != null "> and run = #{run}</if>
+            <if test="carMemo != null  and carMemo != ''"> and car_memo = #{carMemo}</if>
+            <if test="carStatus != null  and carStatus != ''"> and car_status = #{carStatus}</if>
+            <if test="driverUserId != null "> and driver_user_id = #{driverUserId}</if>
+            <if test="driverUserName != null  and driverUserName != ''"> and driver_user_name like concat('%', #{driverUserName}, '%')</if>
+            <if test="isDel != null  and isDel != ''"> and is_del = #{isDel}</if>
+        </where>
+    </select>
+    
+    <select id="selectCarRentalById" parameterType="Long" resultMap="CarRentalResult">
+        <include refid="selectCarRentalVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCarRental" parameterType="CarRental" useGeneratedKeys="true" keyProperty="id">
+        insert into car_rental
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carNumber != null">car_number,</if>
+            <if test="images != null">images,</if>
+            <if test="carColor != null">car_color,</if>
+            <if test="carPrice != null">car_price,</if>
+            <if test="carName != null">car_name,</if>
+            <if test="carModel != null">car_model,</if>
+            <if test="run != null">run,</if>
+            <if test="carMemo != null">car_memo,</if>
+            <if test="carStatus != null">car_status,</if>
+            <if test="driverUserId != null">driver_user_id,</if>
+            <if test="driverUserName != null">driver_user_name,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="isDel != null">is_del,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="carNumber != null">#{carNumber},</if>
+            <if test="images != null">#{images},</if>
+            <if test="carColor != null">#{carColor},</if>
+            <if test="carPrice != null">#{carPrice},</if>
+            <if test="carName != null">#{carName},</if>
+            <if test="carModel != null">#{carModel},</if>
+            <if test="run != null">#{run},</if>
+            <if test="carMemo != null">#{carMemo},</if>
+            <if test="carStatus != null">#{carStatus},</if>
+            <if test="driverUserId != null">#{driverUserId},</if>
+            <if test="driverUserName != null">#{driverUserName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="isDel != null">#{isDel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCarRental" parameterType="CarRental">
+        update car_rental
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="carNumber != null">car_number = #{carNumber},</if>
+            <if test="images != null">images = #{images},</if>
+            <if test="carColor != null">car_color = #{carColor},</if>
+            <if test="carPrice != null">car_price = #{carPrice},</if>
+            <if test="carName != null">car_name = #{carName},</if>
+            <if test="carModel != null">car_model = #{carModel},</if>
+            <if test="run != null">run = #{run},</if>
+            <if test="carMemo != null">car_memo = #{carMemo},</if>
+            <if test="carStatus != null">car_status = #{carStatus},</if>
+            <if test="driverUserId != null">driver_user_id = #{driverUserId},</if>
+            <if test="driverUserName != null">driver_user_name = #{driverUserName},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="isDel != null">is_del = #{isDel},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCarRentalById" parameterType="Long">
+        delete from car_rental where id = #{id}
+    </delete>
+
+    <delete id="deleteCarRentalByIds" parameterType="String">
+        delete from car_rental where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

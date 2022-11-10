@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DriverUserMapper">
+    
+    <resultMap type="DriverUser" id="DriverUserResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="password"    column="password"    />
+        <result property="phone"    column="phone"    />
+        <result property="age"    column="age"    />
+        <result property="address"    column="address"    />
+        <result property="carAge"    column="car_age"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="isDel"    column="is_del"    />
+    </resultMap>
+
+    <sql id="selectDriverUserVo">
+        select id, name, password, phone, age, address, car_age, create_by, create_time, update_by, update_time, is_del from driver_user
+    </sql>
+
+    <select id="selectDriverUserList" parameterType="DriverUser" resultMap="DriverUserResult">
+        <include refid="selectDriverUserVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="age != null "> and age = #{age}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="carAge != null "> and car_age = #{carAge}</if>
+            <if test="isDel != null  and isDel != ''"> and is_del = #{isDel}</if>
+        </where>
+    </select>
+    
+    <select id="selectDriverUserById" parameterType="Long" resultMap="DriverUserResult">
+        <include refid="selectDriverUserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDriverUser" parameterType="DriverUser" useGeneratedKeys="true" keyProperty="id">
+        insert into driver_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="password != null">password,</if>
+            <if test="phone != null">phone,</if>
+            <if test="age != null">age,</if>
+            <if test="address != null">address,</if>
+            <if test="carAge != null">car_age,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="isDel != null">is_del,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="password != null">#{password},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="age != null">#{age},</if>
+            <if test="address != null">#{address},</if>
+            <if test="carAge != null">#{carAge},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="isDel != null">#{isDel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDriverUser" parameterType="DriverUser">
+        update driver_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="carAge != null">car_age = #{carAge},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="isDel != null">is_del = #{isDel},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDriverUserById" parameterType="Long">
+        delete from driver_user where id = #{id}
+    </delete>
+
+    <delete id="deleteDriverUserByIds" parameterType="String">
+        delete from driver_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
