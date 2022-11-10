@@ -38,7 +38,7 @@ export function updateSell(data) {
 // 删除可以卖的车辆信息 
 export function delSell(id) {
   return request({
-    url: '/system/sell/' + id,
+    url: '/system-car/sell/' + id,
     method: 'delete'
   })
 }
