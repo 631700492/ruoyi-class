@@ -56,3 +56,9 @@ spring:
                 wall:
                     config:
                         multi-statement-allow: true
+
+weixin:
+    # 小程序
+    appId: wx2b50f9d15000dd38
+    # appSecret
+    appSecret: 8c4265f6b899203254a7a4d7d5f5fa67

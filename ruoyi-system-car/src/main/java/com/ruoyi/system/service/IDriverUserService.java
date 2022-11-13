@@ -1,7 +1,8 @@
 package com.ruoyi.system.service;
 
-import java.util.List;
 import com.ruoyi.system.domain.DriverUser;
+
+import java.util.List;
 
 /**
  * 司机用户 Service接口
@@ -18,6 +19,13 @@ public interface IDriverUserService
      * @return 司机用户 
      */
     public DriverUser selectDriverUserById(Long id);
+
+    /**
+     * 根据openid  获取用户
+     * @param openid
+     * @return
+     */
+    public DriverUser selectDriverUserByOpenid(String openid);
 
     /**
      * 查询司机用户 列表

@@ -1,12 +1,13 @@
 package com.ruoyi.system.service.impl;
 
-import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.DriverUser;
+import com.ruoyi.system.mapper.DriverUserMapper;
+import com.ruoyi.system.service.IDriverUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.DriverUserMapper;
-import com.ruoyi.system.domain.DriverUser;
-import com.ruoyi.system.service.IDriverUserService;
+
+import java.util.List;
 
 /**
  * 司机用户 Service业务层处理
@@ -30,6 +31,11 @@ public class DriverUserServiceImpl implements IDriverUserService
     public DriverUser selectDriverUserById(Long id)
     {
         return driverUserMapper.selectDriverUserById(id);
+    }
+
+    @Override
+    public DriverUser selectDriverUserByOpenid(String openid) {
+        return driverUserMapper.selectDriverUserByOpenid(openid);
     }
 
     /**

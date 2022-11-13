@@ -17,10 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="isDel"    column="is_del"    />
+        <result property="openid"    column="openid"    />
     </resultMap>
 
     <sql id="selectDriverUserVo">
-        select id, name, password, phone, age, address, car_age, create_by, create_time, update_by, update_time, is_del from driver_user
+        select id, name, password, phone,openid, age, address, car_age, create_by, create_time, update_by, update_time, is_del from driver_user
     </sql>
 
     <select id="selectDriverUserList" parameterType="DriverUser" resultMap="DriverUserResult">
@@ -33,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="address != null  and address != ''"> and address = #{address}</if>
             <if test="carAge != null "> and car_age = #{carAge}</if>
             <if test="isDel != null  and isDel != ''"> and is_del = #{isDel}</if>
+            <if test="openid != null  and openid != ''"> and openid = #{openid}</if>
         </where>
     </select>
     
@@ -40,11 +42,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDriverUserVo"/>
         where id = #{id}
     </select>
-        
+
+    <select id="selectDriverUserByOpenid" parameterType="String" resultMap="DriverUserResult">
+        <include refid="selectDriverUserVo"/>
+        where openid = #{openid}
+    </select>
+
     <insert id="insertDriverUser" parameterType="DriverUser" useGeneratedKeys="true" keyProperty="id">
         insert into driver_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">name,</if>
+            <if test="openid != null">openid,</if>
             <if test="password != null">password,</if>
             <if test="phone != null">phone,</if>
             <if test="age != null">age,</if>
@@ -58,6 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
+            <if test="openid != null">#{openid},</if>
             <if test="password != null">#{password},</if>
             <if test="phone != null">#{phone},</if>
             <if test="age != null">#{age},</if>
@@ -75,6 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update driver_user
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null">name = #{name},</if>
+            <if test="openid != null">openid = #{openid},</if>
             <if test="password != null">password = #{password},</if>
             <if test="phone != null">phone = #{phone},</if>
             <if test="age != null">age = #{age},</if>
