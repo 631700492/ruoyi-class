@@ -64,7 +64,7 @@ public class SysLoginService
     {
         boolean captchaEnabled = configService.selectCaptchaEnabled();
         // 验证码开关   微信不用验证码
-        if (captchaEnabled && !"NoNo".equals(code))
+        if (captchaEnabled && !"nono".equals(code))
         {
             validateCaptcha(username, code, uuid);
         }

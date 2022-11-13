@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.framework.web.service.SysLoginService;
 import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.wx.service.WeiXinAuthApi;
@@ -36,7 +37,7 @@ public class WeiChatLoginController {
 
         SysUser user= sysUserService.selectUserByOpenid(openid);
         if(user == null){
-            return AjaxResult.error("该用户尚未注册过！");
+            return AjaxResult.error("该用户尚未注册过！").put("openid",openid);
         }
 
         //LoginBody loginBody = new LoginBody();
@@ -46,5 +47,27 @@ public class WeiChatLoginController {
                 "");
         ajax.put(Constants.TOKEN, token);
         return ajax;
+    }
+
+    /**
+     * 插入用户信息
+     * @param user
+     * @return
+     */
+    @PostMapping("/register")
+    public AjaxResult login(@RequestBody SysUser user)
+    {
+        if(user ==null ){
+            return new AjaxResult().error("用户信息为空！");
+        }
+        if(user.getOpenid() ==null ){
+            return new AjaxResult().error("用户信息不完整！");
+        }
+        user.setPassword(SecurityUtils.encryptPassword("123456"));
+        user.setPwd("123456");
+        user.setStatus("0");
+        user.setUserName(user.getPhonenumber());
+        sysUserService.insertUser(user);
+        return new AjaxResult().success();
     }
 }
