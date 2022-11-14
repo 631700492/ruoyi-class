@@ -176,15 +176,15 @@
 </template>
 
 <script>
-  import { listUser, getUser, delUser, addUser, updateUser, resetUserPwd, changeUserStatus, deptTreeSelect } from "@/api/system-car/user";
+  import { listUser, getUser, delUser, addUser, updateUser, resetUserPwd, changeUserStatus} from "@/api/system-car/user";
   import { getToken } from "@/utils/auth";
-  import Treeselect from "@riophae/vue-treeselect";
-  import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+ /* import Treeselect from "@riophae/vue-treeselect";
+  import "@riophae/vue-treeselect/dist/vue-treeselect.css";*/
 
   export default {
     name: "User",
     dicts: ['sys_normal_disable', 'sys_user_sex'],
-    components: { Treeselect },
+    /*components: { Treeselect },*/
     data() {
       return {
         // 遮罩层
@@ -295,7 +295,7 @@
     },
     created() {
       this.getList();
-      this.getDeptTree();
+     /* this.getDeptTree();*/
       this.getConfigKey("sys.user.initPassword").then(response => {
         this.initPassword = response.msg;
       });
@@ -312,11 +312,11 @@
         );
       },
       /** 查询部门下拉树结构 */
-      getDeptTree() {
+     /* getDeptTree() {
         deptTreeSelect().then(response => {
           this.deptOptions = response.data;
         });
-      },
+      },*/
       // 筛选节点
       filterNode(value, data) {
         if (!value) return true;

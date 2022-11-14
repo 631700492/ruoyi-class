@@ -29,7 +29,7 @@ export function addRental(data) {
 // 修改可以租借车辆信息 
 export function updateRental(data) {
   return request({
-    url: '/system/rental',
+    url: '/system-car/rental',
     method: 'put',
     data: data
   })

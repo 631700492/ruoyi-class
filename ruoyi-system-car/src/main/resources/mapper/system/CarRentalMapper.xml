@@ -8,6 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="carNumber"    column="car_number"    />
         <result property="images"    column="images"    />
+        <result property="luoImages"    column="luo_images"    />
+        <result property="fuelOilLabel"    column="fuel_oil_label"    />
+        <result property="sourceType"    column="source_type"    />
+        <result property="seat"    column="seat"    />
+        <result property="carType"    column="car_type"    />
         <result property="carColor"    column="car_color"    />
         <result property="carPrice"    column="car_price"    />
         <result property="carName"    column="car_name"    />
@@ -17,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="carStatus"    column="car_status"    />
         <result property="driverUserId"    column="driver_user_id"    />
         <result property="driverUserName"    column="driver_user_name"    />
+        <result property="configurationMemo"    column="configuration_memo"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
@@ -25,14 +31,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCarRentalVo">
-        select id, car_number, images, car_color, car_price, car_name, car_model, run, car_memo, car_status, driver_user_id, driver_user_name, create_by, create_time, update_by, update_time, is_del from car_rental
+        select id, car_number, images, luo_images, fuel_oil_label, source_type, seat, car_type, car_color, car_price, car_name, car_model, run, car_memo, car_status, driver_user_id, driver_user_name, configuration_memo, create_by, create_time, update_by, update_time, is_del from car_rental
     </sql>
 
     <select id="selectCarRentalList" parameterType="CarRental" resultMap="CarRentalResult">
         <include refid="selectCarRentalVo"/>
         <where>  
             <if test="carNumber != null  and carNumber != ''"> and car_number = #{carNumber}</if>
-            <if test="images != null  and images != ''"> and images = #{images}</if>
+            <if test="fuelOilLabel != null  and fuelOilLabel != ''"> and fuel_oil_label = #{fuelOilLabel}</if>
+            <if test="sourceType != null  and sourceType != ''"> and source_type = #{sourceType}</if>
+            <if test="seat != null  and seat != ''"> and seat = #{seat}</if>
+            <if test="carType != null  and carType != ''"> and car_type = #{carType}</if>
             <if test="carColor != null  and carColor != ''"> and car_color = #{carColor}</if>
             <if test="carPrice != null "> and car_price = #{carPrice}</if>
             <if test="carName != null  and carName != ''"> and car_name like concat('%', #{carName}, '%')</if>
@@ -40,8 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="run != null "> and run = #{run}</if>
             <if test="carMemo != null  and carMemo != ''"> and car_memo = #{carMemo}</if>
             <if test="carStatus != null  and carStatus != ''"> and car_status = #{carStatus}</if>
-            <if test="driverUserId != null "> and driver_user_id = #{driverUserId}</if>
             <if test="driverUserName != null  and driverUserName != ''"> and driver_user_name like concat('%', #{driverUserName}, '%')</if>
+            <if test="configurationMemo != null  and configurationMemo != ''"> and configuration_memo = #{configurationMemo}</if>
             <if test="isDel != null  and isDel != ''"> and is_del = #{isDel}</if>
         </where>
     </select>
@@ -56,6 +65,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="carNumber != null">car_number,</if>
             <if test="images != null">images,</if>
+            <if test="luoImages != null">luo_images,</if>
+            <if test="fuelOilLabel != null">fuel_oil_label,</if>
+            <if test="sourceType != null">source_type,</if>
+            <if test="seat != null">seat,</if>
+            <if test="carType != null">car_type,</if>
             <if test="carColor != null">car_color,</if>
             <if test="carPrice != null">car_price,</if>
             <if test="carName != null">car_name,</if>
@@ -65,6 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="carStatus != null">car_status,</if>
             <if test="driverUserId != null">driver_user_id,</if>
             <if test="driverUserName != null">driver_user_name,</if>
+            <if test="configurationMemo != null">configuration_memo,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -74,6 +89,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="carNumber != null">#{carNumber},</if>
             <if test="images != null">#{images},</if>
+            <if test="luoImages != null">#{luoImages},</if>
+            <if test="fuelOilLabel != null">#{fuelOilLabel},</if>
+            <if test="sourceType != null">#{sourceType},</if>
+            <if test="seat != null">#{seat},</if>
+            <if test="carType != null">#{carType},</if>
             <if test="carColor != null">#{carColor},</if>
             <if test="carPrice != null">#{carPrice},</if>
             <if test="carName != null">#{carName},</if>
@@ -83,6 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="carStatus != null">#{carStatus},</if>
             <if test="driverUserId != null">#{driverUserId},</if>
             <if test="driverUserName != null">#{driverUserName},</if>
+            <if test="configurationMemo != null">#{configurationMemo},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -96,6 +117,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="carNumber != null">car_number = #{carNumber},</if>
             <if test="images != null">images = #{images},</if>
+            <if test="luoImages != null">luo_images = #{luoImages},</if>
+            <if test="fuelOilLabel != null">fuel_oil_label = #{fuelOilLabel},</if>
+            <if test="sourceType != null">source_type = #{sourceType},</if>
+            <if test="seat != null">seat = #{seat},</if>
+            <if test="carType != null">car_type = #{carType},</if>
             <if test="carColor != null">car_color = #{carColor},</if>
             <if test="carPrice != null">car_price = #{carPrice},</if>
             <if test="carName != null">car_name = #{carName},</if>
@@ -105,6 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="carStatus != null">car_status = #{carStatus},</if>
             <if test="driverUserId != null">driver_user_id = #{driverUserId},</if>
             <if test="driverUserName != null">driver_user_name = #{driverUserName},</if>
+            <if test="configurationMemo != null">configuration_memo = #{configurationMemo},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>

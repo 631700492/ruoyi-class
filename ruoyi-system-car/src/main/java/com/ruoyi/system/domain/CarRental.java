@@ -1,16 +1,17 @@
 package com.ruoyi.system.domain;
 
-import java.math.BigDecimal;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.math.BigDecimal;
 
 /**
  * 可以租借车辆信息 对象 car_rental
  * 
  * @author ruoyi
- * @date 2022-11-10
+ * @date 2022-11-14
  */
 public class CarRental extends BaseEntity
 {
@@ -27,12 +28,32 @@ public class CarRental extends BaseEntity
     @Excel(name = "图片信息")
     private String images;
 
+    /** 轮播图 */
+    @Excel(name = "轮播图")
+    private String luoImages;
+
+    /** 燃油标号 92-95 */
+    @Excel(name = "燃油标号 92-95")
+    private String fuelOilLabel;
+
+    /** 能源类型 1汽油2耗电 */
+    @Excel(name = "能源类型 1汽油2耗电")
+    private String sourceType;
+
+    /** 结构/座位 */
+    @Excel(name = "结构/座位")
+    private String seat;
+
+    /** 车辆类型 1经济型2商务型3suv4豪华型 */
+    @Excel(name = "车辆类型 1经济型2商务型3suv4豪华型")
+    private String carType;
+
     /** 车辆颜色 */
     @Excel(name = "车辆颜色")
     private String carColor;
 
-    /** 车辆价格 */
-    @Excel(name = "车辆价格")
+    /** 车辆价格 日均 */
+    @Excel(name = "车辆价格 日均")
     private BigDecimal carPrice;
 
     /** 车辆名称 */
@@ -62,6 +83,10 @@ public class CarRental extends BaseEntity
     /** 租车人名字 */
     @Excel(name = "租车人名字")
     private String driverUserName;
+
+    /** 配置信息 */
+    @Excel(name = "配置信息")
+    private String configurationMemo;
 
     /** 是否删除 */
     @Excel(name = "是否删除")
@@ -93,6 +118,51 @@ public class CarRental extends BaseEntity
     public String getImages() 
     {
         return images;
+    }
+    public void setLuoImages(String luoImages) 
+    {
+        this.luoImages = luoImages;
+    }
+
+    public String getLuoImages() 
+    {
+        return luoImages;
+    }
+    public void setFuelOilLabel(String fuelOilLabel) 
+    {
+        this.fuelOilLabel = fuelOilLabel;
+    }
+
+    public String getFuelOilLabel() 
+    {
+        return fuelOilLabel;
+    }
+    public void setSourceType(String sourceType) 
+    {
+        this.sourceType = sourceType;
+    }
+
+    public String getSourceType() 
+    {
+        return sourceType;
+    }
+    public void setSeat(String seat) 
+    {
+        this.seat = seat;
+    }
+
+    public String getSeat() 
+    {
+        return seat;
+    }
+    public void setCarType(String carType) 
+    {
+        this.carType = carType;
+    }
+
+    public String getCarType() 
+    {
+        return carType;
     }
     public void setCarColor(String carColor) 
     {
@@ -175,6 +245,15 @@ public class CarRental extends BaseEntity
     {
         return driverUserName;
     }
+    public void setConfigurationMemo(String configurationMemo) 
+    {
+        this.configurationMemo = configurationMemo;
+    }
+
+    public String getConfigurationMemo() 
+    {
+        return configurationMemo;
+    }
     public void setIsDel(String isDel) 
     {
         this.isDel = isDel;
@@ -191,6 +270,11 @@ public class CarRental extends BaseEntity
             .append("id", getId())
             .append("carNumber", getCarNumber())
             .append("images", getImages())
+            .append("luoImages", getLuoImages())
+            .append("fuelOilLabel", getFuelOilLabel())
+            .append("sourceType", getSourceType())
+            .append("seat", getSeat())
+            .append("carType", getCarType())
             .append("carColor", getCarColor())
             .append("carPrice", getCarPrice())
             .append("carName", getCarName())
@@ -200,6 +284,7 @@ public class CarRental extends BaseEntity
             .append("carStatus", getCarStatus())
             .append("driverUserId", getDriverUserId())
             .append("driverUserName", getDriverUserName())
+            .append("configurationMemo", getConfigurationMemo())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())

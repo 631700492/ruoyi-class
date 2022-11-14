@@ -9,22 +9,22 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="车辆颜色" prop="carColor">
+      <el-form-item label="车辆名称" prop="carName">
         <el-input
-          v-model="queryParams.carColor"
-          placeholder="请输入车辆颜色"
+          v-model="queryParams.carName"
+          placeholder="请输入车辆名称"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="车辆价格" prop="carPrice">
+      <!--<el-form-item label="租车价格" prop="carPrice">
         <el-input
           v-model="queryParams.carPrice"
-          placeholder="请输入车辆价格"
+          placeholder="请输入车辆价格 日均"
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
+      </el-form-item>-->
       <el-form-item label="车辆型号" prop="carModel">
         <el-input
           v-model="queryParams.carModel"
@@ -33,23 +33,25 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="行驶公里" prop="run">
+      <el-form-item label="车辆类型" prop="carType">
+        <el-select v-model="queryParams.carType" placeholder="车辆类型" clearable>
+          <el-option
+            v-for="dict in dict.type.car_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
+      <!--<el-form-item label="行驶公里" prop="run">
         <el-input
           v-model="queryParams.run"
           placeholder="请输入行驶公里"
           clearable
           @keyup.enter.native="handleQuery"
         />
-      </el-form-item>
-      <el-form-item label="租车人id" prop="driverUserId">
-        <el-input
-          v-model="queryParams.driverUserId"
-          placeholder="请输入租车人id"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="租车人名字" prop="driverUserName">
+      </el-form-item>-->
+      <el-form-item label="租车人" prop="driverUserName">
         <el-input
           v-model="queryParams.driverUserName"
           placeholder="请输入租车人名字"
@@ -57,14 +59,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="是否删除" prop="isDel">
-        <el-input
-          v-model="queryParams.isDel"
-          placeholder="请输入是否删除"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -104,7 +99,7 @@
           v-hasPermi="['system-car:rental:remove']"
         >删除</el-button>
       </el-col>
-      <el-col :span="1.5">
+      <!--<el-col :span="1.5">
         <el-button
           type="warning"
           plain
@@ -113,7 +108,7 @@
           @click="handleExport"
           v-hasPermi="['system-car:rental:export']"
         >导出</el-button>
-      </el-col>
+      </el-col>-->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -121,17 +116,44 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="车牌号" align="center" prop="carNumber" />
-      <el-table-column label="图片信息" align="center" prop="images" />
+      <el-table-column label="图片信息" align="center" prop="images" width="100">
+        <template slot-scope="scope">
+          <image-preview :src="scope.row.images" :width="50" :height="50"/>
+        </template>
+      </el-table-column>
+     <!-- <el-table-column label="轮播图" align="center" prop="luoImages" width="100">
+        <template slot-scope="scope">
+          <image-preview :src="scope.row.luoImages" :width="50" :height="50"/>
+        </template>
+      </el-table-column>-->
+      <!--<el-table-column label="燃油标号" align="center" prop="fuelOilLabel" />-->
+      <el-table-column prop="fuelOilLabel" label="燃油标号" >
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.fuel_oil_label" :value="scope.row.fuelOilLabel"/>
+        </template>
+      </el-table-column>
+     <!-- <el-table-column label="能源类型" align="center" prop="sourceType" />-->
+      <el-table-column prop="sourceType" label="能源类型" >
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.source_type" :value="scope.row.sourceType"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="结构/座位" align="center" prop="seat" />
+      <!--<el-table-column label="车辆类型" align="center" prop="carType" />-->
+      <el-table-column prop="carType" label="能源类型" >
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.car_type" :value="scope.row.carType"/>
+        </template>
+      </el-table-column>
       <el-table-column label="车辆颜色" align="center" prop="carColor" />
       <el-table-column label="车辆价格" align="center" prop="carPrice" />
       <el-table-column label="车辆名称" align="center" prop="carName" />
       <el-table-column label="车辆型号" align="center" prop="carModel" />
       <el-table-column label="行驶公里" align="center" prop="run" />
       <el-table-column label="车辆介绍" align="center" prop="carMemo" />
-      <el-table-column label="车辆状态" align="center" prop="carStatus" />
-      <el-table-column label="租车人id" align="center" prop="driverUserId" />
+      <!--<el-table-column label="车辆状态" align="center" prop="carStatus" />-->
       <el-table-column label="租车人名字" align="center" prop="driverUserName" />
-      <el-table-column label="是否删除" align="center" prop="isDel" />
+      <el-table-column label="配置信息" align="center" prop="configurationMemo" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -151,7 +173,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -166,20 +188,56 @@
         <el-form-item label="车牌号" prop="carNumber">
           <el-input v-model="form.carNumber" placeholder="请输入车牌号" />
         </el-form-item>
-        <el-form-item label="图片信息" prop="images">
-          <el-input v-model="form.images" type="textarea" placeholder="请输入内容" />
+        <el-form-item label="图片信息">
+          <image-upload v-model="form.images"/>
         </el-form-item>
-        <el-form-item label="车辆颜色" prop="carColor">
-          <el-input v-model="form.carColor" placeholder="请输入车辆颜色" />
+        <el-form-item label="轮播图">
+          <image-upload v-model="form.luoImages"/>
         </el-form-item>
-        <el-form-item label="车辆价格" prop="carPrice">
-          <el-input v-model="form.carPrice" placeholder="请输入车辆价格" />
+        <el-form-item label="车辆价格(元/日)" prop="carPrice">
+          <el-input v-model="form.carPrice" placeholder="请输入车辆价格 日均" />
         </el-form-item>
         <el-form-item label="车辆名称" prop="carName">
-          <el-input v-model="form.carName" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.carName"  placeholder="请输入内容" />
+        </el-form-item>
+        <el-form-item label="结构/座位" prop="seat">
+          <el-input v-model="form.seat"  placeholder="请输入内容" />
+        </el-form-item>
+        <el-form-item label="车辆颜色" prop="carColor">
+          <el-input v-model="form.carColor"  placeholder="请输入内容" />
         </el-form-item>
         <el-form-item label="车辆型号" prop="carModel">
           <el-input v-model="form.carModel" placeholder="请输入车辆型号" />
+        </el-form-item>
+        <el-form-item label="车辆类型" prop="carType">
+          <el-select v-model="form.carType" placeholder="车辆类型" clearable>
+            <el-option
+              v-for="dict in dict.type.car_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="能源类型" prop="sourceType">
+          <el-select v-model="form.sourceType" placeholder="能源类型" clearable>
+            <el-option
+              v-for="dict in dict.type.source_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="燃油标号" prop="fuelOilLabel">
+          <el-select v-model="form.fuelOilLabel" placeholder="燃油标号" clearable>
+            <el-option
+              v-for="dict in dict.type.fuel_oil_label"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="行驶公里" prop="run">
           <el-input v-model="form.run" placeholder="请输入行驶公里" />
@@ -187,14 +245,11 @@
         <el-form-item label="车辆介绍" prop="carMemo">
           <el-input v-model="form.carMemo" type="textarea" placeholder="请输入内容" />
         </el-form-item>
-        <el-form-item label="租车人id" prop="driverUserId">
-          <el-input v-model="form.driverUserId" placeholder="请输入租车人id" />
-        </el-form-item>
         <el-form-item label="租车人名字" prop="driverUserName">
           <el-input v-model="form.driverUserName" placeholder="请输入租车人名字" />
         </el-form-item>
-        <el-form-item label="是否删除" prop="isDel">
-          <el-input v-model="form.isDel" placeholder="请输入是否删除" />
+        <el-form-item label="配置信息" prop="configurationMemo">
+          <el-input v-model="form.configurationMemo" type="textarea" placeholder="请输入内容" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -210,6 +265,7 @@ import { listRental, getRental, delRental, addRental, updateRental } from "@/api
 
 export default {
   name: "Rental",
+  dicts: ['source_type','car_type','fuel_oil_label'],
   data() {
     return {
       // 遮罩层
@@ -235,7 +291,10 @@ export default {
         pageNum: 1,
         pageSize: 10,
         carNumber: null,
-        images: null,
+        fuelOilLabel: null,
+        sourceType: null,
+        seat: null,
+        carType: null,
         carColor: null,
         carPrice: null,
         carName: null,
@@ -243,8 +302,8 @@ export default {
         run: null,
         carMemo: null,
         carStatus: null,
-        driverUserId: null,
         driverUserName: null,
+        configurationMemo: null,
         isDel: null
       },
       // 表单参数
@@ -278,15 +337,21 @@ export default {
         id: null,
         carNumber: null,
         images: null,
+        luoImages: null,
+        fuelOilLabel: null,
+        sourceType: null,
+        seat: null,
+        carType: null,
         carColor: null,
         carPrice: null,
         carName: null,
         carModel: null,
         run: null,
         carMemo: null,
-        carStatus: "0",
+        carStatus: null,
         driverUserId: null,
         driverUserName: null,
+        configurationMemo: null,
         createBy: null,
         createTime: null,
         updateBy: null,

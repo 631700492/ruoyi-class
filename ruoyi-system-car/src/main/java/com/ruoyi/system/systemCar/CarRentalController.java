@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.systemCar;
+package com.ruoyi.system.systemCar;
 
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
