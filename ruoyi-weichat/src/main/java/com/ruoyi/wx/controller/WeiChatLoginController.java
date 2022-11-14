@@ -65,6 +65,8 @@ public class WeiChatLoginController {
         }
         user.setPassword(SecurityUtils.encryptPassword("123456"));
         user.setPwd("123456");
+        //类型 web 1   app 2  微信 3
+        user.setType("3");
         user.setStatus("0");
         user.setUserName(user.getPhonenumber());
         sysUserService.insertUser(user);

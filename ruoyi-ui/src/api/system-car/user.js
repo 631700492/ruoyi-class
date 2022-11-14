@@ -17,6 +17,19 @@ export function getUser(id) {
   })
 }
 
+
+// 用户状态修改
+export function changeUserStatus(userId, status) {
+  const data = {
+    userId,
+    status
+  }
+  return request({
+    url: '/system-car/user/changeStatus',
+    method: 'put',
+    data: data
+  })
+}
 // 新增司机用户 
 export function addUser(data) {
   return request({

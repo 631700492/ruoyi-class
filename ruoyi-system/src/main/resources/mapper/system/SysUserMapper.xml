@@ -66,6 +66,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="userId != null and userId != 0">
 			AND u.user_id = #{userId}
 		</if>
+		<if test="type != null and type != ''">
+			AND u.type = #{type}
+		</if>
 		<if test="type != null and type != 0">
 			AND u.type = #{type}
 		</if>
@@ -104,6 +107,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')
 		</if>
+		<if test="type != null and type != ''">
+			AND u.type = #{type}
+		</if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
 	</select>
@@ -121,6 +127,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')
+		</if>
+		<if test="type != null and type != ''">
+			AND u.type = #{type}
 		</if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
