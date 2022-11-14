@@ -1,17 +1,19 @@
 package com.ruoyi.common.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.core.page.PageDomain;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Entity基类
  * 
  * @author ruoyi
  */
-public class BaseEntity implements Serializable
+public class BaseEntity extends PageDomain implements Serializable
 {
     private static final long serialVersionUID = 1L;
 

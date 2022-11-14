@@ -6,7 +6,6 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.system.domain.CarRental;
 import com.ruoyi.system.service.ICarRentalService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +22,7 @@ public class RentalCarController extends BaseController {
     /**
      * 查询可以租借车辆信息 列表
      */
-    @PreAuthorize("@ss.hasPermi('system:rental:list')")
+   //PreAuthorize("@ss.hasPermi('system:rental:list')")
     @GetMapping("/centalCarList")
     public TableDataInfo list(CarRental carRental)
     {

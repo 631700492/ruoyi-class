@@ -31,7 +31,7 @@ public class DriverUserController extends BaseController
     /**
      * 获取用户列表
      */
-    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @PreAuthorize("@ss.hasPermi('system-car:user:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysUser user)
     {
@@ -42,7 +42,7 @@ public class DriverUserController extends BaseController
     }
 
     @Log(title = "导出用户信息", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('system:user:export')")
+    @PreAuthorize("@ss.hasPermi('system-car:user:export')")
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysUser user)
     {
@@ -57,7 +57,7 @@ public class DriverUserController extends BaseController
     /**
      * 状态修改
      */
-    @PreAuthorize("@ss.hasPermi('system:user:edit')")
+    @PreAuthorize("@ss.hasPermi('system-car:user:edit')")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")
     public AjaxResult changeStatus(@RequestBody SysUser user)

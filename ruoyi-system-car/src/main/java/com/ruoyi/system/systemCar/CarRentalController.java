@@ -31,7 +31,7 @@ public class CarRentalController extends BaseController
     /**
      * 查询可以租借车辆信息 列表
      */
-    @PreAuthorize("@ss.hasPermi('system:rental:list')")
+    @PreAuthorize("@ss.hasPermi('system-car:rental:list')")
     @GetMapping("/list")
     public TableDataInfo list(CarRental carRental)
     {
@@ -43,7 +43,7 @@ public class CarRentalController extends BaseController
     /**
      * 导出可以租借车辆信息 列表
      */
-    @PreAuthorize("@ss.hasPermi('system:rental:export')")
+    @PreAuthorize("@ss.hasPermi('system-car:rental:export')")
     @Log(title = "可以租借车辆信息 ", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CarRental carRental)
@@ -56,7 +56,7 @@ public class CarRentalController extends BaseController
     /**
      * 获取可以租借车辆信息 详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:rental:query')")
+    @PreAuthorize("@ss.hasPermi('system-car:rental:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -66,7 +66,7 @@ public class CarRentalController extends BaseController
     /**
      * 新增可以租借车辆信息 
      */
-    @PreAuthorize("@ss.hasPermi('system:rental:add')")
+    @PreAuthorize("@ss.hasPermi('system-car:rental:add')")
     @Log(title = "可以租借车辆信息 ", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CarRental carRental)
@@ -77,7 +77,7 @@ public class CarRentalController extends BaseController
     /**
      * 修改可以租借车辆信息 
      */
-    @PreAuthorize("@ss.hasPermi('system:rental:edit')")
+    @PreAuthorize("@ss.hasPermi('system-car:rental:edit')")
     @Log(title = "可以租借车辆信息 ", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CarRental carRental)
@@ -88,7 +88,7 @@ public class CarRentalController extends BaseController
     /**
      * 删除可以租借车辆信息 
      */
-    @PreAuthorize("@ss.hasPermi('system:rental:remove')")
+    @PreAuthorize("@ss.hasPermi('system-car:rental:remove')")
     @Log(title = "可以租借车辆信息 ", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
