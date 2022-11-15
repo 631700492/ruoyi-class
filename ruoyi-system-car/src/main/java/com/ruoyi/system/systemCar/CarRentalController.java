@@ -95,4 +95,16 @@ public class CarRentalController extends BaseController
     {
         return toAjax(carRentalService.deleteCarRentalByIds(ids));
     }
+
+
+    /**
+     * 是否热门图片修改
+     */
+    @PreAuthorize("@ss.hasPermi('system-car:rental:hostImage')")
+    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
+    @PutMapping("/changeHostImage")
+    public AjaxResult changeHostImage(@RequestBody CarRental carRental)
+    {
+        return toAjax(carRentalService.updateCarRental(carRental));
+    }
 }

@@ -26,18 +26,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
+        <result property="hostImage"    column="host_image"    />
         <result property="updateTime"    column="update_time"    />
         <result property="isDel"    column="is_del"    />
     </resultMap>
 
     <sql id="selectCarRentalVo">
-        select id, car_number, images, luo_images, fuel_oil_label, source_type, seat, car_type, car_color, car_price, car_name, car_model, run, car_memo, car_status, driver_user_id, driver_user_name, configuration_memo, create_by, create_time, update_by, update_time, is_del from car_rental
+        select id, car_number,host_image, images, luo_images, fuel_oil_label, source_type, seat, car_type, car_color, car_price, car_name, car_model, run, car_memo, car_status, driver_user_id, driver_user_name, configuration_memo, create_by, create_time, update_by, update_time, is_del from car_rental
     </sql>
 
     <select id="selectCarRentalList" parameterType="CarRental" resultMap="CarRentalResult">
         <include refid="selectCarRentalVo"/>
         <where>  
             <if test="carNumber != null  and carNumber != ''"> and car_number = #{carNumber}</if>
+            <if test="hostImage != null  and hostImage != ''"> and host_image = #{hostImage}</if>
             <if test="fuelOilLabel != null  and fuelOilLabel != ''"> and fuel_oil_label = #{fuelOilLabel}</if>
             <if test="sourceType != null  and sourceType != ''"> and source_type = #{sourceType}</if>
             <if test="seat != null  and seat != ''"> and seat = #{seat}</if>
@@ -85,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="isDel != null">is_del,</if>
+            <if test="hostImage != null">host_image,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="carNumber != null">#{carNumber},</if>
@@ -109,6 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="isDel != null">#{isDel},</if>
+            <if test="hostImage != null">#{hostImage},</if>
          </trim>
     </insert>
 
@@ -137,6 +141,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="isDel != null">is_del = #{isDel},</if>
+            <if test="hostImage != null">host_image = #{hostImage},</if>
         </trim>
         where id = #{id}
     </update>

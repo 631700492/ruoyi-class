@@ -35,6 +35,19 @@ export function updateRental(data) {
   })
 }
 
+// 用户状态修改
+export function changeHostImage(id, hostImage) {
+  const data = {
+    id,
+    hostImage
+  }
+  return request({
+    url: '/system-car/rental/changeHostImage',
+    method: 'put',
+    data: data
+  })
+}
+
 // 删除可以租借车辆信息 
 export function delRental(id) {
   return request({

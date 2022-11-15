@@ -152,6 +152,18 @@
       <el-table-column label="行驶公里" align="center" prop="run" />
       <el-table-column label="车辆介绍" align="center" prop="carMemo" />
       <!--<el-table-column label="车辆状态" align="center" prop="carStatus" />-->
+      dict in dict.type.sys_yes_no
+
+      <el-table-column label="是否热门" align="center" key="hostImage">
+        <template slot-scope="scope">
+          <el-switch
+            v-model="scope.row.hostImage"
+            active-value="1"
+            inactive-value="0"
+            @change="handleHostImageChange(scope.row)"
+          ></el-switch>
+        </template>
+      </el-table-column>
       <el-table-column label="租车人名字" align="center" prop="driverUserName" />
       <el-table-column label="配置信息" align="center" prop="configurationMemo" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -261,7 +273,7 @@
 </template>
 
 <script>
-import { listRental, getRental, delRental, addRental, updateRental } from "@/api/system-car/rental";
+import { listRental, getRental, delRental, addRental, updateRental,changeHostImage } from "@/api/system-car/rental";
 
 export default {
   name: "Rental",
@@ -324,6 +336,17 @@ export default {
         this.rentalList = response.rows;
         this.total = response.total;
         this.loading = false;
+      });
+    },
+    //  是否热门，如果热门的话   会上轮播图
+    handleHostImageChange(row) {
+      let text = row.status === "0" ? "普通" : "热门推荐";
+      this.$modal.confirm('确认要设置为"' + text+'"？').then(function() {
+        return changeHostImage(row.id, row.hostImage);
+      }).then(() => {
+        this.$modal.msgSuccess(text + "成功");
+      }).catch(function() {
+        row.hostImage = row.hostImage === "0" ? "1" : "0";
       });
     },
     // 取消按钮

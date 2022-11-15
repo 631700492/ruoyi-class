@@ -13,6 +13,7 @@ import java.math.BigDecimal;
  * @author ruoyi
  * @date 2022-11-14
  */
+
 public class CarRental extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -92,7 +93,19 @@ public class CarRental extends BaseEntity
     @Excel(name = "是否删除")
     private String isDel;
 
-    public void setId(Long id) 
+    @Excel(name = "是否热门图片")
+    private String hostImage;
+
+
+    public String getHostImage() {
+        return hostImage;
+    }
+
+    public void setHostImage(String hostImage) {
+        this.hostImage = hostImage;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
