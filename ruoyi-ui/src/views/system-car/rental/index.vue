@@ -150,7 +150,7 @@
       <el-table-column label="车辆名称" align="center" prop="carName" />
       <el-table-column label="车辆型号" align="center" prop="carModel" />
       <el-table-column label="行驶公里" align="center" prop="run" />
-      <el-table-column label="车辆介绍" align="center" prop="carMemo" />
+      <el-table-column label="车辆介绍" align="center" prop="carMemo"  :show-overflow-tooltip="true"/>
       <!--<el-table-column label="车辆状态" align="center" prop="carStatus" />-->
       dict in dict.type.sys_yes_no
 
@@ -165,7 +165,7 @@
         </template>
       </el-table-column>
       <el-table-column label="租车人名字" align="center" prop="driverUserName" />
-      <el-table-column label="配置信息" align="center" prop="configurationMemo" />
+      <el-table-column label="配置信息" align="center" prop="configurationMemo" :show-overflow-tooltip="true"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
