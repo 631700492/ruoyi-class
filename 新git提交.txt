@@ -38,3 +38,35 @@ cd /usr/local   切换到sql目录
 systemctl start mysqld.service  启动sql
 service mysqld status  sql运行状态
 service mysqld restart   重启sql
+
+mysql 自动备份
+https://blog.csdn.net/qq_41946060/article/details/127509417
+
+npm 卡住就更换淘宝镜像
+npm config set registry https://registry.npm.taobao.org
+
+为了让vue（web）后端运行不会因终端关闭而关闭比如（nohup ）
+第一种   这个还需要配置
+forevernpm install forever -g   安装forever --forever是一个nodejs守护进程，完全由命令行操控
+service forever start 启动服务
+forever start index.js 使用 forever 启动 js 文件
+forever stop index.js 停止 js 文件
+forever restart index.js 重启js文件
+启动js文件并输出日志文件
+forever start -l forever.log -o out.log -e err.log index.js
+forever list 查看正在运行的进程
+
+选择第二种
+npm install -g pm2
+pm2 start app.js // 启动
+pm2 start app.js -i max //启动 使用所有CPU核心的集群
+pm2 stop app.js // 停止
+pm2 stop all // 停止所有
+pm2 restart app.js // 重启
+pm2 restart all // 重启所有
+pm2 delete app.js // 关闭
+
+
+关于 Github提交代码失败
+https://zhaojun.blog.csdn.net/article/details/126022032?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-3-126022032-blog-123257465.pc_relevant_3mothn_strategy_and_data_recovery&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-3-126022032-blog-123257465.pc_relevant_3mothn_strategy_and_data_recovery&utm_relevant_index=6
+git config --global http.postBuffer 524288000
