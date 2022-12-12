@@ -1,0 +1,45 @@
+jenkins   部署和安装
+https://dandelioncloud.cn/article/details/1501473963967590402
+
+
+vi /etc/sysconfig/jenkins    默认端口8080 ---》去修改对应端口
+systemctl start jenkins   启动
+systemctl status jenkins.service  查看状态  --》会有错误提示
+
+
+vi /etc/init.d/jenkins   去修改java路径
+systemctl daemon-reload  命令重新加载配置文件
+sudo systemctl start jenkins 命令启动Jenkins
+systemctl status jenkins.service 命令查看Jenkins服务的状态
+
+
+ln - s /usr/local/java/jdk1.8.0_221/bin/java /usr/bin/java
+
+
+新jdk
+/lib/jvm/java-11-openjdk-11.0.13.0.8-4.el8_5.x86_64
+
+
+//https://www.jb51.net/article/230962.htm   linux  jenkins安装
+
+卸载jenkins 
+# rpm卸载
+rpm -e jenkins
+# 检查是否卸载成功
+rpm -ql jenkins
+# 彻底删除残留文件
+find / -iname jenkins | xargs -n 1000 rm -rf
+
+
+安装
+直接用命令下载
+    wget http://pkg.jenkins-ci.org/redhat-stable/jenkins-2.190.3-1.1.noarch.rpm
+下载直接安装
+    rpm -ivh jenkins-2.190.3-1.1.noarch.rpm
+
+git 密码 l1314520
+jenkins 账号密码  ltl 
+密码 l1314520
+
+jenkins-plugin-cli --plugins locale:1.4
+

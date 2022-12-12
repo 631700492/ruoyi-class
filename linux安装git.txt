@@ -1,0 +1,57 @@
+卸载git
+yum -y remove git
+
+下载安装文件
+ yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm
+
+安装
+yum -y install git
+
+查看git版本
+git --version
+
+查看git安装位置 ：
+which git
+
+创建仓库
+https://www.cnblogs.com/JayYang/p/16436643.html
+
+服务器端创建 git 用户，用来管理 Git 服务，并为 git 用户设置密码
+[root@ceontOS ~]# cd /home                                  #进入/home/目录
+[root@ceontOS home]# id git                                 #查看git用户是否存在
+id: git: no such user                                       #提示git用户不存在
+[root@ceontOS home]# useradd git                            #创建git用户
+[root@ceontOS home]# passwd git                             #为git用户创建密码
+Changing password for user git.
+New password:                                               #设置密码
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password:                                        #确认密码
+passwd: all authentication tokens updated successfully.
+
+
+服务器端创建 Git 仓库
+设置 /home/git/repository/gittest.git 为 Git 仓库
+[root@ceontOS home]# mkdir -p ./git/repository/gittest.git #在git用户目录下创建仓库目录repositroy，并且创建gittest.git项目测试目录
+[root@ceontOS home]# ls #查看/home/目录下有哪些用户目录
+admin git
+[root@ceontOS home]# cd git #进入git用户目录
+[root@ceontOS git]# ls #查看git用户目录下有哪些目录/文件
+repository
+[root@ceontOS git]# cd repository/ #进入repository仓库目录
+[root@ceontOS repository]# ls #查看仓库目录下的项目目录
+gittest.git
+[root@ceontOS repository]# git init --bare ./gittest.git #这步很重要，初始化项目测试目录
+Initialized empty Git repository in /home/git/repository/gittest.
+
+
+修改目录拥有者
+[root@ceontOS git]# ll #查看gittest.git项目文件夹的拥有者
+total 4
+drwxr-xr-x 3 root root 4096 Jan 13 13:08 repository #拥有者是root用户名
+[root@ceontOS git]# chown -R git:git repository #将拥有者改为git用户
+[root@ceontOS git]# ll #再次查看gittest.git项目文件夹的拥有者
+total 4
+drwxr-xr-x 3 git git 4096 Jan 13 13:08 repository #拥有者是git用户
+
+远程克隆下来
+git clone git@39.103.200.124:/home/git/repository/gittest.git
